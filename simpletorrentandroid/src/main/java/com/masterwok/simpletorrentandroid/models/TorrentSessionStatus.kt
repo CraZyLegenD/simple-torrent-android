@@ -49,6 +49,8 @@ class TorrentSessionStatus private constructor(
         )
     }
 
+    val getProgress get() = bytesDownloaded/bytesWanted*100
+
     override fun toString(): String = "State: $state" +
             ", Bencode Size: ${bencode.size}" +
             ", Seeder Count: $seederCount" +

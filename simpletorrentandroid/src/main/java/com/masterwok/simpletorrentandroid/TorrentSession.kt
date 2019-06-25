@@ -103,7 +103,83 @@ open class TorrentSession(
                     AlertType.TORRENT_ERROR -> torrentSession.get()?.onTorrentError(alert as TorrentErrorAlert)
                     AlertType.ADD_TORRENT -> torrentSession.get()?.onAddTorrent(alert as AddTorrentAlert)
                     AlertType.BLOCK_UPLOADED -> torrentSession.get()?.onBlockUploaded(alert as BlockUploadedAlert)
-                    else -> Log.d(Tag, "Unhandled alert: $alert")
+                    AlertType.TORRENT_CHECKED -> {}
+                    AlertType.TORRENT_NEED_CERT -> {}
+                    AlertType.INCOMING_CONNECTION -> {}
+                    AlertType.SAVE_RESUME_DATA -> {}
+                    AlertType.FASTRESUME_REJECTED -> {}
+                    AlertType.BLOCK_FINISHED -> {}
+                    AlertType.FILE_COMPLETED -> {}
+                    AlertType.FILE_RENAMED -> {}
+                    AlertType.FILE_RENAME_FAILED -> {}
+                    AlertType.FILE_ERROR -> {}
+                    AlertType.HASH_FAILED -> {}
+                    AlertType.PORTMAP -> {}
+                    AlertType.PORTMAP_ERROR -> {}
+                    AlertType.PORTMAP_LOG -> {}
+                    AlertType.TRACKER_ANNOUNCE -> {}
+                    AlertType.TRACKER_REPLY -> {}
+                    AlertType.TRACKER_WARNING -> {}
+                    AlertType.TRACKER_ERROR -> {}
+                    AlertType.READ_PIECE -> {}
+                    AlertType.STATE_CHANGED -> {}
+                    AlertType.DHT_REPLY -> {}
+                    AlertType.DHT_GET_PEERS -> {}
+                    AlertType.EXTERNAL_IP -> {}
+                    AlertType.LISTEN_SUCCEEDED -> {}
+                    AlertType.STATE_UPDATE -> {}
+                    AlertType.SESSION_STATS -> {}
+                    AlertType.SCRAPE_REPLY -> {}
+                    AlertType.SCRAPE_FAILED -> {}
+                    AlertType.LSD_PEER -> {}
+                    AlertType.PEER_BLOCKED -> {}
+                    AlertType.PERFORMANCE -> {}
+                    AlertType.SAVE_RESUME_DATA_FAILED -> {}
+                    AlertType.STATS -> {}
+                    AlertType.STORAGE_MOVED -> {}
+                    AlertType.URL_SEED -> {}
+                    AlertType.INVALID_REQUEST -> {}
+                    AlertType.LISTEN_FAILED -> {}
+                    AlertType.PEER_BAN -> {}
+                    AlertType.PEER_CONNECT -> {}
+                    AlertType.PEER_DISCONNECTED -> {}
+                    AlertType.PEER_ERROR -> {}
+                    AlertType.PEER_SNUBBED -> {}
+                    AlertType.PEER_UNSNUBBED -> {}
+                    AlertType.REQUEST_DROPPED -> {}
+                    AlertType.UDP_ERROR -> {}
+                    AlertType.ANONYMOUS_MODE -> {}
+                    AlertType.BLOCK_DOWNLOADING -> {}
+                    AlertType.BLOCK_TIMEOUT -> {}
+                    AlertType.CACHE_FLUSHED -> {}
+                    AlertType.DHT_ANNOUNCE -> {}
+                    AlertType.STORAGE_MOVED_FAILED -> {}
+                    AlertType.TRACKERID -> {}
+                    AlertType.UNWANTED_BLOCK -> {}
+                    AlertType.DHT_ERROR -> {}
+                    AlertType.DHT_PUT -> {}
+                    AlertType.DHT_MUTABLE_ITEM -> {}
+                    AlertType.DHT_IMMUTABLE_ITEM -> {}
+                    AlertType.I2P -> {}
+                    AlertType.DHT_OUTGOING_GET_PEERS -> {}
+                    AlertType.LOG -> {}
+                    AlertType.TORRENT_LOG -> {}
+                    AlertType.PEER_LOG -> {}
+                    AlertType.LSD_ERROR -> {}
+                    AlertType.INCOMING_REQUEST -> {}
+                    AlertType.DHT_LOG -> {}
+                    AlertType.DHT_PKT -> {}
+                    AlertType.DHT_GET_PEERS_REPLY -> {}
+                    AlertType.DHT_DIRECT_RESPONSE -> {}
+                    AlertType.PICKER_LOG -> {}
+                    AlertType.SESSION_ERROR -> {}
+                    AlertType.DHT_LIVE_NODES -> {}
+                    AlertType.SESSION_STATS_HEADER -> {}
+                    AlertType.DHT_SAMPLE_INFOHASHES -> {}
+                    AlertType.UNKNOWN -> {}
+                    else -> {
+
+                    }
                 }
             } catch (e: Exception) {
                 Log.e(Tag, "An exception occurred within torrent session callback", e)
