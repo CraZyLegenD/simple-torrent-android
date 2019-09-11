@@ -1,7 +1,7 @@
 package com.masterwok.demosimpletorrentandroid.extensions
 
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SimpleItemAnimator
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 
 
 /**

@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_pause_resume"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:minHeight="100dp"
         android:text="@string/button_pause"
         android:textColor="@android:color/white">
-    </android.support.v7.widget.AppCompatButton>
+    </androidx.appcompat.widget.AppCompatButton>
 
     <fragment
         android:id="@+id/fragment_torrent_pieces"

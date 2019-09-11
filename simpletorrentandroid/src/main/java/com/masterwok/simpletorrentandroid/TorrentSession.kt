@@ -414,7 +414,7 @@ open class TorrentSession(
         val bytes = context
                 .contentResolver
                 .openInputStream(torrentUri)
-                .readBytes()
+                ?.readBytes()
 
         sessionManager.download(
                 TorrentInfo.bdecode(bytes)

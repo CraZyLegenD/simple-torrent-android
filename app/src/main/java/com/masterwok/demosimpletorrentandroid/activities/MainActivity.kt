@@ -7,10 +7,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatButton
+import com.google.android.material.tabs.TabLayout
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.masterwok.demosimpletorrentandroid.R
 import com.masterwok.demosimpletorrentandroid.adapters.TabFragmentPagerAdapter
 import com.masterwok.demosimpletorrentandroid.fragments.TorrentFragment
@@ -131,6 +131,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, FilePickerRequestCode)
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         if (requestCode != FilePickerRequestCode
                 || resultCode != Activity.RESULT_OK
@@ -138,9 +139,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val tabFragment = createTabWithUri(intent.data)
+        val tabFragment = intent.data?.let { createTabWithUri(it) }
 
-        torrentSessionPagerAdapter.addTab(tabFragment)
+        tabFragment?.let { torrentSessionPagerAdapter.addTab(it) }
+        super.onActivityResult(requestCode, resultCode, intent)
     }
 
 
