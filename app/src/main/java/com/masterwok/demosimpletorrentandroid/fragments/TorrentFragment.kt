@@ -20,9 +20,7 @@ import com.masterwok.simpletorrentandroid.contracts.TorrentSessionListener
 import com.masterwok.simpletorrentandroid.models.TorrentSessionStatus
 import java.lang.ref.WeakReference
 
-class TorrentFragment : Fragment()
-        , TabFragmentPagerAdapter.TabFragment<TorrentSessionStatus>
-        , TorrentSessionListener {
+class TorrentFragment : Fragment(), TabFragmentPagerAdapter.TabFragment<TorrentSessionStatus>, TorrentSessionListener {
 
     private lateinit var torrentSession: TorrentSession
 
@@ -38,12 +36,7 @@ class TorrentFragment : Fragment()
 
         private const val Tag = "TorrentFragment"
 
-        fun newInstance(
-                context: Context
-                , tabIndex: Int
-                , magnetUri: Uri
-                , torrentSessionOptions: TorrentSessionOptions
-        ): TorrentFragment = TorrentFragment().apply {
+        fun newInstance(context: Context, tabIndex: Int, magnetUri: Uri, torrentSessionOptions: TorrentSessionOptions): TorrentFragment = TorrentFragment().apply {
             this.tabIndex = tabIndex
 
             torrentSession = TorrentSession(torrentSessionOptions)
@@ -54,15 +47,7 @@ class TorrentFragment : Fragment()
         }
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater
-            , container: ViewGroup?
-            , savedInstanceState: Bundle?
-    ): View = inflater.inflate(
-            R.layout.fragment_torrent
-            , container
-            , false
-    )
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = inflater.inflate(R.layout.fragment_torrent, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -224,9 +209,7 @@ class TorrentFragment : Fragment()
 
         override fun doInBackground(vararg args: Void) {
             try {
-                torrentSession
-                        .get()
-                        ?.start(context.get()!!, magnetUri)
+                torrentSession.get()?.start(context.get()!!, magnetUri)
             } catch (ex: Exception) {
                 Log.e(Tag, "Failed to start torrent", ex)
             }

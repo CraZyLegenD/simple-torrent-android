@@ -8,14 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * Request an array of [permissions] with the provided [requestCode].
  */
-fun AppCompatActivity.appCompatRequestPermissions(
-        permissions: Array<String>
-        , requestCode: Int
-) = ActivityCompat.requestPermissions(
-        this
-        , permissions
-        , requestCode
-)
+fun AppCompatActivity.appCompatRequestPermissions(permissions: Array<String>, requestCode: Int) = ActivityCompat.requestPermissions(this, permissions, requestCode)
 
 
 /**

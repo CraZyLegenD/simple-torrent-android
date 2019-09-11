@@ -22,7 +22,7 @@ import java.security.InvalidParameterException
  * This class is used to control a torrent download session.
  */
 @Suppress("MemberVisibilityCanBePrivate", "unused")
-open class TorrentSession(
+class TorrentSession(
         private val torrentSessionOptions: TorrentSessionOptions
 ) {
     companion object {
@@ -65,18 +65,9 @@ open class TorrentSession(
     }
 
     private fun createSessionStatus(torrentHandle: TorrentHandle): TorrentSessionStatus =
-            TorrentSessionStatus.createInstance(
-                    magnetUri
-                    , torrentHandle
-                    , bencode
-                    , torrentSessionBuffer
-                    , saveLocationUri
-                    , largestFileUri
-            )
+            TorrentSessionStatus.createInstance(magnetUri, torrentHandle, bencode, torrentSessionBuffer, saveLocationUri, largestFileUri)
 
-    private class TorrentSessionAlertListener(
-            torrentSession: TorrentSession
-    ) : AlertListener {
+    private class TorrentSessionAlertListener(torrentSession: TorrentSession) : AlertListener {
 
         private val torrentSession: WeakReference<TorrentSession> = WeakReference(torrentSession)
 
@@ -103,80 +94,152 @@ open class TorrentSession(
                     AlertType.TORRENT_ERROR -> torrentSession.get()?.onTorrentError(alert as TorrentErrorAlert)
                     AlertType.ADD_TORRENT -> torrentSession.get()?.onAddTorrent(alert as AddTorrentAlert)
                     AlertType.BLOCK_UPLOADED -> torrentSession.get()?.onBlockUploaded(alert as BlockUploadedAlert)
-                    AlertType.TORRENT_CHECKED -> {}
-                    AlertType.TORRENT_NEED_CERT -> {}
-                    AlertType.INCOMING_CONNECTION -> {}
-                    AlertType.SAVE_RESUME_DATA -> {}
-                    AlertType.FASTRESUME_REJECTED -> {}
-                    AlertType.BLOCK_FINISHED -> {}
-                    AlertType.FILE_COMPLETED -> {}
-                    AlertType.FILE_RENAMED -> {}
-                    AlertType.FILE_RENAME_FAILED -> {}
-                    AlertType.FILE_ERROR -> {}
-                    AlertType.HASH_FAILED -> {}
-                    AlertType.PORTMAP -> {}
-                    AlertType.PORTMAP_ERROR -> {}
-                    AlertType.PORTMAP_LOG -> {}
-                    AlertType.TRACKER_ANNOUNCE -> {}
-                    AlertType.TRACKER_REPLY -> {}
-                    AlertType.TRACKER_WARNING -> {}
-                    AlertType.TRACKER_ERROR -> {}
-                    AlertType.READ_PIECE -> {}
-                    AlertType.STATE_CHANGED -> {}
-                    AlertType.DHT_REPLY -> {}
-                    AlertType.DHT_GET_PEERS -> {}
-                    AlertType.EXTERNAL_IP -> {}
-                    AlertType.LISTEN_SUCCEEDED -> {}
-                    AlertType.STATE_UPDATE -> {}
-                    AlertType.SESSION_STATS -> {}
-                    AlertType.SCRAPE_REPLY -> {}
-                    AlertType.SCRAPE_FAILED -> {}
-                    AlertType.LSD_PEER -> {}
-                    AlertType.PEER_BLOCKED -> {}
-                    AlertType.PERFORMANCE -> {}
-                    AlertType.SAVE_RESUME_DATA_FAILED -> {}
-                    AlertType.STATS -> {}
-                    AlertType.STORAGE_MOVED -> {}
-                    AlertType.URL_SEED -> {}
-                    AlertType.INVALID_REQUEST -> {}
-                    AlertType.LISTEN_FAILED -> {}
-                    AlertType.PEER_BAN -> {}
-                    AlertType.PEER_CONNECT -> {}
-                    AlertType.PEER_DISCONNECTED -> {}
-                    AlertType.PEER_ERROR -> {}
-                    AlertType.PEER_SNUBBED -> {}
-                    AlertType.PEER_UNSNUBBED -> {}
-                    AlertType.REQUEST_DROPPED -> {}
-                    AlertType.UDP_ERROR -> {}
-                    AlertType.ANONYMOUS_MODE -> {}
-                    AlertType.BLOCK_DOWNLOADING -> {}
-                    AlertType.BLOCK_TIMEOUT -> {}
-                    AlertType.CACHE_FLUSHED -> {}
-                    AlertType.DHT_ANNOUNCE -> {}
-                    AlertType.STORAGE_MOVED_FAILED -> {}
-                    AlertType.TRACKERID -> {}
-                    AlertType.UNWANTED_BLOCK -> {}
-                    AlertType.DHT_ERROR -> {}
-                    AlertType.DHT_PUT -> {}
-                    AlertType.DHT_MUTABLE_ITEM -> {}
-                    AlertType.DHT_IMMUTABLE_ITEM -> {}
-                    AlertType.I2P -> {}
-                    AlertType.DHT_OUTGOING_GET_PEERS -> {}
-                    AlertType.LOG -> {}
-                    AlertType.TORRENT_LOG -> {}
-                    AlertType.PEER_LOG -> {}
-                    AlertType.LSD_ERROR -> {}
-                    AlertType.INCOMING_REQUEST -> {}
-                    AlertType.DHT_LOG -> {}
-                    AlertType.DHT_PKT -> {}
-                    AlertType.DHT_GET_PEERS_REPLY -> {}
-                    AlertType.DHT_DIRECT_RESPONSE -> {}
-                    AlertType.PICKER_LOG -> {}
-                    AlertType.SESSION_ERROR -> {}
-                    AlertType.DHT_LIVE_NODES -> {}
-                    AlertType.SESSION_STATS_HEADER -> {}
-                    AlertType.DHT_SAMPLE_INFOHASHES -> {}
-                    AlertType.UNKNOWN -> {}
+                    AlertType.TORRENT_CHECKED -> {
+                    }
+                    AlertType.TORRENT_NEED_CERT -> {
+                    }
+                    AlertType.INCOMING_CONNECTION -> {
+                    }
+                    AlertType.SAVE_RESUME_DATA -> {
+                    }
+                    AlertType.FASTRESUME_REJECTED -> {
+                    }
+                    AlertType.BLOCK_FINISHED -> {
+                    }
+                    AlertType.FILE_COMPLETED -> {
+                    }
+                    AlertType.FILE_RENAMED -> {
+                    }
+                    AlertType.FILE_RENAME_FAILED -> {
+                    }
+                    AlertType.FILE_ERROR -> {
+                    }
+                    AlertType.HASH_FAILED -> {
+                    }
+                    AlertType.PORTMAP -> {
+                    }
+                    AlertType.PORTMAP_ERROR -> {
+                    }
+                    AlertType.PORTMAP_LOG -> {
+                    }
+                    AlertType.TRACKER_ANNOUNCE -> {
+                    }
+                    AlertType.TRACKER_REPLY -> {
+                    }
+                    AlertType.TRACKER_WARNING -> {
+                    }
+                    AlertType.TRACKER_ERROR -> {
+                    }
+                    AlertType.READ_PIECE -> {
+                    }
+                    AlertType.STATE_CHANGED -> {
+                    }
+                    AlertType.DHT_REPLY -> {
+                    }
+                    AlertType.DHT_GET_PEERS -> {
+                    }
+                    AlertType.EXTERNAL_IP -> {
+                    }
+                    AlertType.LISTEN_SUCCEEDED -> {
+                    }
+                    AlertType.STATE_UPDATE -> {
+                    }
+                    AlertType.SESSION_STATS -> {
+                    }
+                    AlertType.SCRAPE_REPLY -> {
+                    }
+                    AlertType.SCRAPE_FAILED -> {
+                    }
+                    AlertType.LSD_PEER -> {
+                    }
+                    AlertType.PEER_BLOCKED -> {
+                    }
+                    AlertType.PERFORMANCE -> {
+                    }
+                    AlertType.SAVE_RESUME_DATA_FAILED -> {
+                    }
+                    AlertType.STATS -> {
+                    }
+                    AlertType.STORAGE_MOVED -> {
+                    }
+                    AlertType.URL_SEED -> {
+                    }
+                    AlertType.INVALID_REQUEST -> {
+                    }
+                    AlertType.LISTEN_FAILED -> {
+                    }
+                    AlertType.PEER_BAN -> {
+                    }
+                    AlertType.PEER_CONNECT -> {
+                    }
+                    AlertType.PEER_DISCONNECTED -> {
+                    }
+                    AlertType.PEER_ERROR -> {
+                    }
+                    AlertType.PEER_SNUBBED -> {
+                    }
+                    AlertType.PEER_UNSNUBBED -> {
+                    }
+                    AlertType.REQUEST_DROPPED -> {
+                    }
+                    AlertType.UDP_ERROR -> {
+                    }
+                    AlertType.BLOCK_DOWNLOADING -> {
+                    }
+                    AlertType.BLOCK_TIMEOUT -> {
+                    }
+                    AlertType.CACHE_FLUSHED -> {
+                    }
+                    AlertType.DHT_ANNOUNCE -> {
+                    }
+                    AlertType.STORAGE_MOVED_FAILED -> {
+                    }
+                    AlertType.TRACKERID -> {
+                    }
+                    AlertType.UNWANTED_BLOCK -> {
+                    }
+                    AlertType.DHT_ERROR -> {
+                    }
+                    AlertType.DHT_PUT -> {
+                    }
+                    AlertType.DHT_MUTABLE_ITEM -> {
+                    }
+                    AlertType.DHT_IMMUTABLE_ITEM -> {
+                    }
+                    AlertType.I2P -> {
+                    }
+                    AlertType.DHT_OUTGOING_GET_PEERS -> {
+                    }
+                    AlertType.LOG -> {
+                    }
+                    AlertType.TORRENT_LOG -> {
+                    }
+                    AlertType.PEER_LOG -> {
+                    }
+                    AlertType.LSD_ERROR -> {
+                    }
+                    AlertType.INCOMING_REQUEST -> {
+                    }
+                    AlertType.DHT_LOG -> {
+                    }
+                    AlertType.DHT_PKT -> {
+                    }
+                    AlertType.DHT_GET_PEERS_REPLY -> {
+                    }
+                    AlertType.DHT_DIRECT_RESPONSE -> {
+                    }
+                    AlertType.PICKER_LOG -> {
+                    }
+                    AlertType.SESSION_ERROR -> {
+                    }
+                    AlertType.DHT_LIVE_NODES -> {
+                    }
+                    AlertType.SESSION_STATS_HEADER -> {
+                    }
+                    AlertType.DHT_SAMPLE_INFOHASHES -> {
+                    }
+                    AlertType.UNKNOWN -> {
+                    }
                     else -> {
 
                     }
@@ -212,10 +275,7 @@ open class TorrentSession(
 
         setInitialTorrentState(torrentHandle)
 
-        listener?.onMetadataReceived(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onMetadataReceived(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun setInitialTorrentState(torrentHandle: TorrentHandle) {
@@ -251,14 +311,9 @@ open class TorrentSession(
 
         setInitialTorrentState(torrentHandle)
 
-        listener?.onAddTorrent(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onAddTorrent(torrentHandle, createSessionStatus(torrentHandle))
 
-        addTorrentAlert
-                .handle()
-                .resume()
+        addTorrentAlert.handle().resume()
     }
 
     private fun onPieceFinished(pieceFinishedAlert: PieceFinishedAlert) {
@@ -312,74 +367,50 @@ open class TorrentSession(
             return
         }
 
-        listener?.onTorrentPaused(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onTorrentPaused(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun onTorrentResumed(torrentResumedAlert: TorrentResumedAlert) {
         val torrentHandle = torrentResumedAlert.handle()
 
-        listener?.onTorrentResumed(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onTorrentResumed(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun onTorrentRemoved(torrentRemovedAlert: TorrentRemovedAlert) {
         val torrentHandle = torrentRemovedAlert.handle()
 
-        listener?.onTorrentRemoved(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onTorrentRemoved(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun onTorrentDeleted(torrentDeletedAlert: TorrentDeletedAlert) {
         val torrentHandle = torrentDeletedAlert.handle()
 
-        listener?.onTorrentDeleted(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onTorrentDeleted(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun onTorrentError(torrentErrorAlert: TorrentErrorAlert) {
         val torrentHandle = torrentErrorAlert.handle()
 
-        listener?.onTorrentError(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onTorrentError(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun onTorrentFinished(torrentFinishedAlert: TorrentFinishedAlert) {
         val torrentHandle = torrentFinishedAlert.handle()
 
-        listener?.onTorrentFinished(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onTorrentFinished(torrentHandle, createSessionStatus(torrentHandle))
     }
 
     private fun onBlockUploaded(blockUploadedAlert: BlockUploadedAlert) {
         val torrentHandle = blockUploadedAlert.handle()
 
-        listener?.onBlockUploaded(
-                torrentHandle
-                , createSessionStatus(torrentHandle)
-        )
+        listener?.onBlockUploaded(torrentHandle, createSessionStatus(torrentHandle))
     }
 
 
     /**
      * Download a torrent from the [torrentUrl] to the [downloadLocation] destination.
      */
-    private fun downloadUsingNetworkUri(
-            downloadLocation: File
-            , torrentUrl: URL
-    ) {
+    private fun downloadUsingNetworkUri(downloadLocation: File, torrentUrl: URL) {
         val connection = (torrentUrl.openConnection() as HttpURLConnection).apply {
             requestMethod = "GET"
             instanceFollowRedirects = true
@@ -395,10 +426,7 @@ open class TorrentSession(
                 .inputStream
                 .readBytes()
 
-        sessionManager.download(
-                TorrentInfo.bdecode(data)
-                , downloadLocation
-        )
+        sessionManager.download(TorrentInfo.bdecode(data), downloadLocation)
     }
 
 
@@ -406,11 +434,7 @@ open class TorrentSession(
      * Download the torrent using a content URI. The provided [context] is used
      * to resolve the content resolver.
      */
-    private fun downloadUsingContentUri(
-            context: Context
-            , downloadLocation: File
-            , torrentUri: Uri
-    ) {
+    private fun downloadUsingContentUri(context: Context, downloadLocation: File, torrentUri: Uri) {
         val bytes = context
                 .contentResolver
                 .openInputStream(torrentUri)
@@ -422,10 +446,7 @@ open class TorrentSession(
         )
     }
 
-    private fun downloadUsingMagnetUri(
-            magnetUrl: String
-            , downloadLocation: File
-    ) = synchronized(dhtLock) {
+    private fun downloadUsingMagnetUri(magnetUrl: String, downloadLocation: File) = synchronized(dhtLock) {
         shouldDownloadMagnetOnResume = false
 
         // We must wait for DHT to start
@@ -439,10 +460,7 @@ open class TorrentSession(
             return
         }
 
-        sessionManager.download(
-                URLDecoder.decode(magnetUrl, "utf-8")
-                , downloadLocation
-        )
+        sessionManager.download(URLDecoder.decode(magnetUrl, "utf-8"), downloadLocation)
     }
 
     fun resume() {
@@ -477,10 +495,7 @@ open class TorrentSession(
             sessionManager.start(sessionParams)
         }
 
-        sessionManager.download(
-                TorrentInfo.bdecode(bencode)
-                , torrentSessionOptions.downloadLocation
-        )
+        sessionManager.download(TorrentInfo.bdecode(bencode), torrentSessionOptions.downloadLocation)
     }
 
     /**
@@ -506,17 +521,11 @@ open class TorrentSession(
                     , torrentSessionOptions.downloadLocation
             )
         } else if (URLUtil.isNetworkUrl(path)) {
-            downloadUsingNetworkUri(
-                    torrentSessionOptions.downloadLocation
-                    , URL(path)
+            downloadUsingNetworkUri(torrentSessionOptions.downloadLocation, URL(path)
             )
 
         } else if (URLUtil.isFileUrl(path) || URLUtil.isContentUrl(path)) {
-            downloadUsingContentUri(
-                    context
-                    , torrentSessionOptions.downloadLocation
-                    , torrentUri
-            )
+            downloadUsingContentUri(context, torrentSessionOptions.downloadLocation, torrentUri)
         }
     }
 
@@ -532,7 +541,6 @@ open class TorrentSession(
 
     fun stop() {
         sessionManager.stop()
-
         sessionManager.removeListener(alertListener)
     }
 

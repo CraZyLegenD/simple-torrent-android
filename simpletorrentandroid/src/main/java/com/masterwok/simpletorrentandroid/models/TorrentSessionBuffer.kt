@@ -6,11 +6,7 @@ package com.masterwok.simpletorrentandroid.models
  * used internally to keep track of which pieces to prioritize when streaming.
  */
 @Suppress("CanBeParameter", "MemberVisibilityCanBePrivate")
-class TorrentSessionBuffer constructor(
-        val bufferSize: Int = 0
-        , val startIndex: Int = 0
-        , val endIndex: Int = 0
-) {
+class TorrentSessionBuffer(val bufferSize: Int = 0, val startIndex: Int = 0, val endIndex: Int = 0) {
     @Suppress("unused")
     constructor() : this(0, 0, 0)
 
@@ -24,30 +20,22 @@ class TorrentSessionBuffer constructor(
      */
     var downloadedPieceCount = 0
         @Synchronized
-        get() = field
-        private set(value) {
-            field = value
-        }
+        get
+        private set
 
     /**
      * The index of the head of the buffer.
      */
     var bufferHeadIndex = startIndex
         @Synchronized
-        get() = field
-        private set(value) {
-            field = value
-        }
+        private set
 
     /**
      * The index of the tail of the buffer.
      */
     var bufferTailIndex = if (bufferSize == 0) endIndex else startIndex + bufferSize - 1
         @Synchronized
-        get() = field
-        private set(value) {
-            field = value
-        }
+        private set
 
     /**
      * The index of the last downloaded piece. If no pieces were downloaded, then
@@ -55,10 +43,7 @@ class TorrentSessionBuffer constructor(
      */
     var lastDownloadedPieceIndex = -1
         @Synchronized
-        get() = field
-        private set(value) {
-            field = value
-        }
+        private set
 
     /**
      * Determine if all pieces are downloaded.

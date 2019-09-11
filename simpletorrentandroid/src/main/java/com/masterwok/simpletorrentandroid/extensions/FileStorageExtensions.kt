@@ -17,7 +17,7 @@ internal fun FileStorage.getLargestFileIndex(): Int {
         return -1
     }
 
-    for (i in 0..(fileCount - 1)) {
+    for (i in 0 until fileCount) {
         val fileSize = fileSize(i)
 
         if (fileSize > largestFileSize) {
