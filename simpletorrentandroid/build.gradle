@@ -44,7 +44,7 @@ dependencies {
     api "com.frostwire:jlibtorrent-android-x86:$version_jlibtorrent"
     api "com.frostwire:jlibtorrent-android-x86_64:$version_jlibtorrent"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

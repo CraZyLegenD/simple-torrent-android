@@ -71,7 +71,7 @@ dependencies {
     // Provides file picker for pre KitKat (API 19) devices.
     implementation 'com.nononsenseapps:filepicker:4.1.0'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':simpletorrentandroid')
