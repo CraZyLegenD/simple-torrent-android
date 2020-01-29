@@ -1,5 +1,7 @@
 package com.masterwok.simpletorrentandroid.models
 
+import kotlin.math.min
+
 
 /**
  * This buffer contains the current download state of torrent pieces and is
@@ -55,7 +57,11 @@ class TorrentSessionBuffer(val bufferSize: Int = 0, val startIndex: Int = 0, val
      * Check if piece at [index] is downloaded.
      */
     @Synchronized
-    fun isPieceDownloaded(index: Int) = pieceDownloadStates[index]
+    fun isPieceDownloaded(index: Int) = try {
+        pieceDownloadStates[index]
+    }catch (e:Exception){
+        false
+    }
 
     @Synchronized
     override fun toString(): String = "Total Pieces: $pieceCount" +
@@ -75,7 +81,11 @@ class TorrentSessionBuffer(val bufferSize: Int = 0, val startIndex: Int = 0, val
             return true
         }
 
-        pieceDownloadStates[index] = true
+        try {
+            pieceDownloadStates[index] = true
+        }catch (e:Exception){
+
+        }
         lastDownloadedPieceIndex = index
         downloadedPieceCount++
 
@@ -91,7 +101,7 @@ class TorrentSessionBuffer(val bufferSize: Int = 0, val startIndex: Int = 0, val
         }
 
         // Don't let the tail of the buffer go past the last piece.
-        bufferTailIndex = Math.min(bufferTailIndex, endIndex)
+        bufferTailIndex = min(bufferTailIndex, endIndex)
 
         if (allPiecesAreDownloaded()) {
             bufferHeadIndex = bufferTailIndex

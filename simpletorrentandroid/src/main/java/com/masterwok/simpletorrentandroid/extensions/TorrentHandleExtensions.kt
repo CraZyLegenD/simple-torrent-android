@@ -39,6 +39,49 @@ internal fun TorrentHandle.getTotalWanted(): Long = status().totalWanted()
  */
 internal fun TorrentHandle.getTotalDone(): Long = status().totalDone()
 
+
+/**
+ * The total number of bytes to download for this torrent. This
+ * may be less than the size of the torrent in case there are
+ * pad files. This number only counts bytes that will actually
+ * be requested from peers.
+ */
+internal fun TorrentHandle.getTotal(): Long = status().total()
+
+
+
+/**
+ * The number of bytes downloaded and uploaded to all peers, accumulated, this session
+ * only. The session is considered to restart when a torrent is paused and restarted
+ * again. When a torrent is paused, these counters are reset to 0. If you want complete,
+ * persistent, stats, see allTimeUpload and allTimeDownload.
+ */
+internal fun TorrentHandle.getTotalDownloaded(): Long = status().totalDownload()
+
+
+/**
+ * The number of seeds in our peer list and the total number of peers (including seeds).
+ * We are not necessarily connected to all the peers in our peer list. This is the number
+ * of peers we know of in total, including banned peers and peers that we have failed to
+ * connect to.
+ */
+internal fun TorrentHandle.seedersList(): Int = status().listSeeds()
+
+
+
+/**
+ * Returns the number of peer connections this torrent has,
+ * including half-open connections that hasn't completed the
+ * bittorrent handshake yet.
+ *
+ * This is always {@code >= num_peers}.
+ *
+ * @return the number of peer connections
+ */
+internal fun TorrentHandle.numConnections(): Int = status().numConnections()
+
+
+
 /**
  * Get the progress of the [TorrentHandle].
  */

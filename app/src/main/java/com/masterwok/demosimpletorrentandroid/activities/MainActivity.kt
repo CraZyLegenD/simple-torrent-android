@@ -1,24 +1,16 @@
 package com.masterwok.demosimpletorrentandroid.activities
 
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.masterwok.demosimpletorrentandroid.R
 import com.masterwok.demosimpletorrentandroid.adapters.TabFragmentPagerAdapter
 import com.masterwok.demosimpletorrentandroid.fragments.TorrentFragment
 import com.masterwok.simpletorrentandroid.TorrentSessionOptions
-import com.masterwok.simpletorrentandroid.extensions.appCompatRequestPermissions
-import com.masterwok.simpletorrentandroid.extensions.isPermissionGranted
 import com.masterwok.simpletorrentandroid.models.TorrentSessionStatus
-import com.nononsenseapps.filepicker.FilePickerActivity
 
 
 /**
@@ -34,17 +26,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     private lateinit var buttonAddTorrent: AppCompatButton
 
-    companion object {
-        const val FilePickerRequestCode = 6906
-    }
-
     private val torrentUrls = arrayOf(
             "http://www.frostclick.com/torrents/video/animation/Big_Buck_Bunny_1080p_surround_frostclick.com_frostwire.com.torrent"
             , "magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent"
     )
 
-    private val torrentSessionOptions = TorrentSessionOptions(
-            downloadLocation = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+    private val torrentSessionOptions get() =  TorrentSessionOptions(
+            downloadLocation = filesDir
             , onlyDownloadLargestFile = true
             , enableLogging = false
             , shouldStream = true
@@ -61,15 +49,6 @@ class MainActivity : AppCompatActivity() {
         bindViewComponents()
         subscribeToViewComponents()
         initTabLayout()
-
-        if (!isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            appCompatRequestPermissions(
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    , 0
-            )
-
-            return
-        }
     }
 
     private fun initTabLayout() {
@@ -92,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun createTabWithUri(torrentUri: Uri): TorrentFragment =
             TorrentFragment.newInstance(
                     this
@@ -106,44 +86,7 @@ class MainActivity : AppCompatActivity() {
         buttonAddTorrent = findViewById(R.id.button_add_torrent)
     }
 
-    /**
-     * This method can be invoked in the buttonAddTorrent click listener to select
-     * a torrent file.
-     */
-    @Suppress("unused")
-    private fun startFilePickerActivity() {
-        val intent: Intent
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                type = "*/*"
-            }
-        } else {
-            // Fallback to external file picker.
-            intent = Intent(this, FilePickerActivity::class.java).apply {
-                putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false)
-                putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false)
-                putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE)
-                putExtra(FilePickerActivity.EXTRA_START_PATH, torrentSessionOptions.downloadLocation)
-            }
-        }
-
-        startActivityForResult(intent, FilePickerRequestCode)
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        if (requestCode != FilePickerRequestCode
-                || resultCode != Activity.RESULT_OK
-                || intent == null) {
-            return
-        }
-
-        val tabFragment = intent.data?.let { createTabWithUri(it) }
-
-        tabFragment?.let { torrentSessionPagerAdapter.addTab(it) }
-        super.onActivityResult(requestCode, resultCode, intent)
-    }
 
 
 }

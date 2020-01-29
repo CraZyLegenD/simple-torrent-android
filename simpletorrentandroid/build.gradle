@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -24,10 +24,6 @@ android {
 
 }
 
-ext {
-    version_support = '27.1.1'
-    version_jlibtorrent = '1.2.0.18'
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -38,11 +34,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // jLibTorrent
-    api "com.frostwire:jlibtorrent:$version_jlibtorrent"
-    api "com.frostwire:jlibtorrent-android-arm:$version_jlibtorrent"
-    api "com.frostwire:jlibtorrent-android-arm64:$version_jlibtorrent"
-    api "com.frostwire:jlibtorrent-android-x86:$version_jlibtorrent"
-    api "com.frostwire:jlibtorrent-android-x86_64:$version_jlibtorrent"
+    api files('libs/jlibtorrent-1.2.3.0.jar')
+    api files('libs/jlibtorrent-android-arm-1.2.3.0.jar')
+    api files('libs/jlibtorrent-android-x86-1.2.3.0.jar')
+    api files('libs/jlibtorrent-android-arm64-1.2.3.0.jar')
+    api files('libs/jlibtorrent-android-x86_64-1.2.3.0.jar')
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'

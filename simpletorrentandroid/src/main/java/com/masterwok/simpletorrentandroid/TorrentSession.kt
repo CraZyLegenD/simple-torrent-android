@@ -323,7 +323,6 @@ class TorrentSession(
 
         if (pieceIndex < torrentSessionBuffer.startIndex || pieceIndex > torrentSessionBuffer.endIndex) {
             Log.w(Tag, "Out of range piece downloaded.")
-            return
         }
 
         torrentSessionBuffer.setPieceDownloaded(pieceIndex)
@@ -521,8 +520,7 @@ class TorrentSession(
                     , torrentSessionOptions.downloadLocation
             )
         } else if (URLUtil.isNetworkUrl(path)) {
-            downloadUsingNetworkUri(torrentSessionOptions.downloadLocation, URL(path)
-            )
+            downloadUsingNetworkUri(torrentSessionOptions.downloadLocation, URL(path))
 
         } else if (URLUtil.isFileUrl(path) || URLUtil.isContentUrl(path)) {
             downloadUsingContentUri(context, torrentSessionOptions.downloadLocation, torrentUri)
@@ -538,6 +536,14 @@ class TorrentSession(
     val isRunning: Boolean get() = sessionManager.isRunning
 
     fun pause() = sessionManager.pause()
+
+    fun pauseOrResume() {
+        if (isPaused) {
+            resume()
+        } else {
+            pause()
+        }
+    }
 
     fun stop() {
         sessionManager.stop()
