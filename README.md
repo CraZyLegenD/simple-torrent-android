@@ -1,4 +1,5 @@
-[![Release](https://jitpack.io/v/masterwok/simple-torrent-android.svg)](https://jitpack.io/#masterwok/simple-torrent-android)
+
+[![](https://jitpack.io/v/CraZyLegenD/simple-torrent-android.svg)](https://jitpack.io/#CraZyLegenD/simple-torrent-android) [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org) [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com/guide/)
 
 # simple-torrent-android
 An Android torrent client library powered by [frostwire-jlibtorrent](https://github.com/frostwire/frostwire-jlibtorrent). It supports sequential and simultaneous downloads.
@@ -54,13 +55,7 @@ and add the following in the dependent module:
 
 ```gradle
 dependencies {
-    implementation 'com.github.masterwok:simple-torrent-android:0.5.0'
+    implementation 'com.github.CraZyLegenD:simple-torrent-android:Tag'
 }
 ```
 
-## Projects using simple-torrent-android
-- [Bit Cast](https://play.google.com/store/apps/details?id=com.masterwok.bitcast)
-
-## Demo Screenshots
-
-<img src="/app/screenshots/example.jpg?raw=true" height="600" title="Demo">
