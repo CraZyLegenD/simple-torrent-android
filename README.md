@@ -1,4 +1,5 @@
 
+
 [![](https://jitpack.io/v/CraZyLegenD/simple-torrent-android.svg)](https://jitpack.io/#CraZyLegenD/simple-torrent-android) [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org) [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com/guide/)
 
 # simple-torrent-android
@@ -59,3 +60,8 @@ dependencies {
 }
 ```
 
+If you use ProGuard to obfuscate/minify make sure to add the following statement:
+
+```
+-keep class com.frostwire.jlibtorrent.swig.libtorrent_jni {*;}
+```
