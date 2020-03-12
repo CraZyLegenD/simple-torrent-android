@@ -59,8 +59,8 @@ class TestActivity : AppCompatActivity(), TorrentSessionListener {
 
 
     override fun onPieceFinished(torrentHandle: TorrentHandle, torrentSessionStatus: TorrentSessionStatus) {
-        /*Log.i("onPieceFinished", torrentHandle.name().toString())
-        Log.i("onPieceFinished", torrentSessionStatus.toString())*/
+        Log.i("onPieceFinished", torrentHandle.name().toString())
+        Log.i("onPieceFinished", torrentSessionStatus.toString())
     }
 
     override fun onAddTorrent(torrentHandle: TorrentHandle, torrentSessionStatus: TorrentSessionStatus) {
