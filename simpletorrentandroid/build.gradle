@@ -34,11 +34,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     // jLibTorrent
-    api files('libs/jlibtorrent-1.2.5.0.jar')
-    api files('libs/jlibtorrent-android-arm-1.2.5.0.jar')
-    api files('libs/jlibtorrent-android-x86-1.2.5.0.jar')
-    api files('libs/jlibtorrent-android-arm64-1.2.5.0.jar')
-    api files('libs/jlibtorrent-android-x86_64-1.2.5.0.jar')
+    api files('libs/jlibtorrent-1.2.7.0.jar')
+    api files('libs/jlibtorrent-android-arm-1.2.7.0.jar')
+    api files('libs/jlibtorrent-android-x86-1.2.7.0.jar')
+    api files('libs/jlibtorrent-android-arm64-1.2.7.0.jar')
+    api files('libs/jlibtorrent-android-x86_64-1.2.7.0.jar')
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'

@@ -5,6 +5,7 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse
 import org.junit.Test
 import java.util.*
+import kotlin.math.min
 
 class TorrentSessionBufferTest {
 
@@ -22,7 +23,7 @@ class TorrentSessionBufferTest {
             bufferHeadIndex: Int
             , endIndex: Int
             , bufferSize: Int
-    ): Int = Math.min(bufferHeadIndex + bufferSize - 1, endIndex)
+    ): Int = min(bufferHeadIndex + bufferSize - 1, endIndex)
 
     private fun IntRange.random(): Int {
         return Random().nextInt((endInclusive + 1) - start) + start
@@ -192,7 +193,7 @@ class TorrentSessionBufferTest {
         )
 
         assertEquals(underTest.bufferHeadIndex, 30)
-        assertEquals(underTest.bufferTailIndex, Math.min(expectedTail, endIndex))
+        assertEquals(underTest.bufferTailIndex, min(expectedTail, endIndex))
     }
 
     @Test
@@ -214,6 +215,6 @@ class TorrentSessionBufferTest {
         underTest.setPieceDownloaded(0)
 
         assertEquals(underTest.bufferHeadIndex, endIndex)
-        assertEquals(underTest.bufferTailIndex, Math.min(underTest.bufferHeadIndex + bufferSize, endIndex))
+        assertEquals(underTest.bufferTailIndex, min(underTest.bufferHeadIndex + bufferSize, endIndex))
     }
 }
