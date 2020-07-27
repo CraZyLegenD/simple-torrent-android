@@ -1,4 +1,4 @@
-package com.masterwok.simpletorrentandroid
+package com.masterwok.simpletorrentandroid.downloader
 
 import android.content.Context
 import android.net.Uri
@@ -6,10 +6,10 @@ import android.util.Log
 import android.webkit.URLUtil
 import com.frostwire.jlibtorrent.*
 import com.frostwire.jlibtorrent.alerts.*
-import com.masterwok.simpletorrentandroid.contracts.TorrentSessionListener
-import com.masterwok.simpletorrentandroid.extensions.*
-import com.masterwok.simpletorrentandroid.models.TorrentSessionBuffer
-import com.masterwok.simpletorrentandroid.models.TorrentSessionStatus
+import com.masterwok.simpletorrentandroid.downloader.contracts.TorrentSessionListener
+import com.masterwok.simpletorrentandroid.downloader.extensions.*
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionBuffer
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionStatus
 import java.io.File
 import java.lang.ref.WeakReference
 import java.net.HttpURLConnection

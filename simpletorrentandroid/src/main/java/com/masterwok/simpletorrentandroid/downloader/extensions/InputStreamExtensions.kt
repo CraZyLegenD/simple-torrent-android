@@ -1,4 +1,4 @@
-package com.masterwok.simpletorrentandroid.extensions
+package com.masterwok.simpletorrentandroid.downloader.extensions
 
 import java.io.ByteArrayOutputStream
 import java.io.InputStream

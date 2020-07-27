@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.masterwok.demosimpletorrentandroid.R
-import com.masterwok.simpletorrentandroid.models.TorrentSessionBuffer
-import com.masterwok.simpletorrentandroid.models.TorrentSessionStatus
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionBuffer
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionStatus
 
 class TorrentPieceAdapter : RecyclerView.Adapter<TorrentPieceAdapter.PieceViewHolder>() {
 

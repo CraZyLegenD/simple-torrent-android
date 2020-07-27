@@ -1,4 +1,4 @@
-package com.masterwok.simpletorrentandroid.models
+package com.masterwok.simpletorrentandroid.downloader.models
 
 import kotlin.math.min
 

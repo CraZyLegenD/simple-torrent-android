@@ -1,4 +1,4 @@
-package com.masterwok.simpletorrentandroid
+package com.masterwok.simpletorrentandroid.downloader
 
 import com.frostwire.jlibtorrent.SettingsPack
 import com.frostwire.jlibtorrent.swig.settings_pack

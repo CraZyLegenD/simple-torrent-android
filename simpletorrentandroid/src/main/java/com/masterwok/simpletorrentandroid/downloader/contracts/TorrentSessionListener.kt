@@ -1,7 +1,7 @@
-package com.masterwok.simpletorrentandroid.contracts
+package com.masterwok.simpletorrentandroid.downloader.contracts
 
 import com.frostwire.jlibtorrent.TorrentHandle
-import com.masterwok.simpletorrentandroid.models.TorrentSessionStatus
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionStatus
 
 
 /**

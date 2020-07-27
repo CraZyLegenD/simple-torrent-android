@@ -1,9 +1,9 @@
-package com.masterwok.simpletorrentandroid.extensions
+package com.masterwok.simpletorrentandroid.downloader.extensions
 
 import android.net.Uri
 import com.frostwire.jlibtorrent.Priority
 import com.frostwire.jlibtorrent.TorrentHandle
-import com.masterwok.simpletorrentandroid.models.TorrentSessionBuffer
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionBuffer
 import java.io.File
 
 

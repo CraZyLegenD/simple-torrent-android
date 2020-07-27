@@ -14,10 +14,10 @@ import com.frostwire.jlibtorrent.TorrentHandle
 import com.frostwire.jlibtorrent.TorrentStatus
 import com.masterwok.demosimpletorrentandroid.R
 import com.masterwok.demosimpletorrentandroid.adapters.TabFragmentPagerAdapter
-import com.masterwok.simpletorrentandroid.TorrentSession
-import com.masterwok.simpletorrentandroid.TorrentSessionOptions
-import com.masterwok.simpletorrentandroid.contracts.TorrentSessionListener
-import com.masterwok.simpletorrentandroid.models.TorrentSessionStatus
+import com.masterwok.simpletorrentandroid.downloader.TorrentSession
+import com.masterwok.simpletorrentandroid.downloader.TorrentSessionOptions
+import com.masterwok.simpletorrentandroid.downloader.contracts.TorrentSessionListener
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionStatus
 import java.lang.ref.WeakReference
 
 class TorrentFragment : Fragment(), TabFragmentPagerAdapter.TabFragment<TorrentSessionStatus>, TorrentSessionListener {

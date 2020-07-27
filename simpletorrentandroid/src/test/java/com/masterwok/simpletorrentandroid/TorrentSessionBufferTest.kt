@@ -1,6 +1,6 @@
 package com.masterwok.simpletorrentandroid
 
-import com.masterwok.simpletorrentandroid.models.TorrentSessionBuffer
+import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionBuffer
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.masterwok.simpletorrentandroid.extensions
+package com.masterwok.simpletorrentandroid.downloader.extensions
 
 import com.frostwire.jlibtorrent.FileStorage
 

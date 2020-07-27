@@ -1,9 +1,9 @@
-package com.masterwok.simpletorrentandroid.models
+package com.masterwok.simpletorrentandroid.downloader.models
 
 import android.net.Uri
 import com.frostwire.jlibtorrent.TorrentHandle
 import com.frostwire.jlibtorrent.TorrentStatus
-import com.masterwok.simpletorrentandroid.extensions.*
+import com.masterwok.simpletorrentandroid.downloader.extensions.*
 
 
 /**
