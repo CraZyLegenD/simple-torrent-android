@@ -34,9 +34,7 @@ public final class ThreadUtils {
      * @param runnable The runnable to execute.
      */
     public static void runOnUiThread(Runnable runnable) {
-        Thread uiThread = Looper.getMainLooper().getThread();
-        if (Thread.currentThread() != uiThread) new Handler(Looper.getMainLooper()).post(runnable);
-        else runnable.run();
+        new Handler(Looper.getMainLooper()).post(runnable);
     }
 
 }
