@@ -1,1 +1,2 @@
+include ':steamer'
 include ':app', ':simpletorrentandroid'
