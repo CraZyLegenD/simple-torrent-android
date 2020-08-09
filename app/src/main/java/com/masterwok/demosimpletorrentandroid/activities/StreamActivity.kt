@@ -9,12 +9,12 @@ import com.crazylegend.kotlinextensions.log.debug
 import com.crazylegend.kotlinextensions.views.setOnClickListenerCooldown
 import com.masterwok.demosimpletorrentandroid.R
 import com.masterwok.demosimpletorrentandroid.extensions.getIpAddress
-import com.masterwok.demosimpletorrentandroid.streamServer.TorrentServerListener
-import com.masterwok.demosimpletorrentandroid.streamServer.TorrentStreamNotInitializedException
-import com.masterwok.demosimpletorrentandroid.streamServer.TorrentStreamServer
 import com.masterwok.simpletorrentandroid.streamer.StreamStatus
 import com.masterwok.simpletorrentandroid.streamer.Torrent
 import com.masterwok.simpletorrentandroid.streamer.TorrentOptions
+import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentServerListener
+import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentStreamNotInitializedException
+import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentStreamServer
 import kotlinx.android.synthetic.main.activity_test.*
 import java.io.IOException
 import java.net.UnknownHostException

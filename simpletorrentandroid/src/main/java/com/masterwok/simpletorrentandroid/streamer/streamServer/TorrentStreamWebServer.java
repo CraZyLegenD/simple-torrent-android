@@ -1,8 +1,8 @@
-package com.masterwok.demosimpletorrentandroid.streamServer;
+package com.masterwok.simpletorrentandroid.streamer.streamServer;
 
-import com.masterwok.demosimpletorrentandroid.streamServer.nanohttpd.NanoHTTPD;
-import com.masterwok.demosimpletorrentandroid.streamServer.nanohttpd.SimpleWebServer;
 import com.masterwok.simpletorrentandroid.streamer.Torrent;
+import com.masterwok.simpletorrentandroid.streamer.streamServer.nanohttpd.NanoHTTPD;
+import com.masterwok.simpletorrentandroid.streamer.streamServer.nanohttpd.SimpleWebServer;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,11 +10,11 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.masterwok.demosimpletorrentandroid.streamServer.FileType.AVI;
-import static com.masterwok.demosimpletorrentandroid.streamServer.FileType.MKV;
-import static com.masterwok.demosimpletorrentandroid.streamServer.FileType.MP4;
-import static com.masterwok.demosimpletorrentandroid.streamServer.FileType.SRT;
-import static com.masterwok.demosimpletorrentandroid.streamServer.FileType.VTT;
+import static com.masterwok.simpletorrentandroid.streamer.streamServer.FileType.AVI;
+import static com.masterwok.simpletorrentandroid.streamer.streamServer.FileType.MKV;
+import static com.masterwok.simpletorrentandroid.streamer.streamServer.FileType.MP4;
+import static com.masterwok.simpletorrentandroid.streamer.streamServer.FileType.SRT;
+import static com.masterwok.simpletorrentandroid.streamer.streamServer.FileType.VTT;
 
 public class TorrentStreamWebServer extends SimpleWebServer {
 
@@ -54,10 +54,10 @@ public class TorrentStreamWebServer extends SimpleWebServer {
     }
 
     @Override
-    public Response serve(IHTTPSession session) {
+    public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
         String uri = session.getUri();
 
-        Response response;
+        NanoHTTPD.Response response;
         String extension = uri.substring(uri.lastIndexOf('.') + 1);
         FileType fileType;
 

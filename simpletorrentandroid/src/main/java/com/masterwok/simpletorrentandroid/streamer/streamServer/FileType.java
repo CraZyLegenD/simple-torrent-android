@@ -1,7 +1,7 @@
-package com.masterwok.demosimpletorrentandroid.streamServer;
+package com.masterwok.simpletorrentandroid.streamer.streamServer;
 
 
-import com.masterwok.demosimpletorrentandroid.streamServer.nanohttpd.NanoHTTPD.Response;
+import com.masterwok.simpletorrentandroid.streamer.streamServer.nanohttpd.NanoHTTPD;
 
 public class FileType {
 
@@ -24,11 +24,11 @@ public class FileType {
         this.dlnaTransferMode = dlnaTransferMode;
     }
 
-    public void setHeaders(Response response) {
+    public void setHeaders(NanoHTTPD.Response response) {
         setHeaders(response, null);
     }
 
-    public void setHeaders(Response response, String subtitlesLocation) {
+    public void setHeaders(NanoHTTPD.Response response, String subtitlesLocation) {
         response.addHeader("contentFeatures.dlna.org", this.dlnaContentFeatures);
         response.addHeader("TransferMode.DLNA.ORG", this.dlnaTransferMode);
         response.addHeader("DAAP-Server", "iTunes/11.0.5 (OS X)");

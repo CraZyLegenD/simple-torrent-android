@@ -1,4 +1,4 @@
-package com.masterwok.demosimpletorrentandroid.streamServer.nanohttpd;
+package com.masterwok.simpletorrentandroid.streamer.streamServer.nanohttpd;
 
 /*
  * #%L

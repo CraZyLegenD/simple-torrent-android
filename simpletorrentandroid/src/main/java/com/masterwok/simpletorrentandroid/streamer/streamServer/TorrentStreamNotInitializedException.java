@@ -1,4 +1,4 @@
-package com.masterwok.demosimpletorrentandroid.streamServer;
+package com.masterwok.simpletorrentandroid.streamer.streamServer;
 
 public class TorrentStreamNotInitializedException extends Exception {
 

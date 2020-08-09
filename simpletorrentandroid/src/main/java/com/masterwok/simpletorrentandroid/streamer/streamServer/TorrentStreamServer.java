@@ -1,4 +1,4 @@
-package com.masterwok.demosimpletorrentandroid.streamServer;
+package com.masterwok.simpletorrentandroid.streamer.streamServer;
 
 import com.masterwok.simpletorrentandroid.streamer.StreamStatus;
 import com.masterwok.simpletorrentandroid.streamer.Torrent;
