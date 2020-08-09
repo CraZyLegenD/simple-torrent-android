@@ -25,7 +25,6 @@ import java.net.UnknownHostException
  */
 class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerListener {
 
-
     private val link1 = "magnet:?xt=urn:btih:a54926c2e07b0e5f0243954330b599b31c804f0b&dn=Batman%20The%20Dark%20Knight%20(2008)%20%5b1080p%5d&tr=udp%3a%2f%2fopen.demonii.com%3a1337&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=udp%3a%2f%2ftracker.pomf.se%3a80&tr=udp%3a%2f%2ftracker.publicbt.com%3a80&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80&tr=udp%3a%2f%2ftracker.istole.it%3a80"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +84,7 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
     }
 
     override fun onStreamProgress(torrent: Torrent?, status: StreamStatus?) {
-        debug("onStreamProgress $torrent status ${status?.bufferProgress}")
+        debug("onStreamProgress ${torrent?.videoFile?.name} status ${status?.bufferProgress} ${status?.progress}")
     }
 
     override fun onServerReady(url: String?) {

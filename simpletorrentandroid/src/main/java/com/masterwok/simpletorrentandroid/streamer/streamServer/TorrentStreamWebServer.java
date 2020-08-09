@@ -53,6 +53,11 @@ public class TorrentStreamWebServer extends SimpleWebServer {
         return "http://" + getHostname() + ":" + getListeningPort() + "/video" + file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf('.'));
     }
 
+    public String getVTTUrl() {
+        File file = vttSubtitleFile;
+        return "http://" + getHostname() + ":" + getListeningPort() + "/text/vtt" + file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf('.'));
+    }
+
     @Override
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
         String uri = session.getUri();

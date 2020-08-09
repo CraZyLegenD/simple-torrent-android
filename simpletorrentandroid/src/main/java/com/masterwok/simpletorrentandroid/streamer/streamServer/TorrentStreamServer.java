@@ -102,6 +102,13 @@ public class TorrentStreamServer {
         return this.torrentStreamWebServer.getStreamUrl();
     }
 
+    public String getCurrentVTTUrl() {
+        if (this.torrentStreamWebServer == null || !this.torrentStreamWebServer.wasStarted()) {
+            return null;
+        }
+        return this.torrentStreamWebServer.getVTTUrl();
+    }
+
     public void addListener(TorrentServerListener listener) {
         if (listener != null) {
             listeners.add(listener);
