@@ -45,6 +45,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
@@ -338,9 +339,7 @@ public final class TorrentStream {
                 }
 
                 Priority[] priorities = new Priority[torrentInfo.numFiles()];
-                for (int i = 0; i < priorities.length; i++) {
-                    priorities[i] = Priority.IGNORE;
-                }
+                Arrays.fill(priorities, Priority.IGNORE);
 
                 if (!currentTorrentUrl.equals(torrentUrl) || isCanceled) {
                     return;
