@@ -129,7 +129,7 @@ public class SimpleWebServer extends NanoHTTPD {
         }
 
         if (cors != null) {
-            r = addCORSHeaders(headers, r, cors);
+            r = addCORSHeaders(r, cors);
         }
         return r;
     }
@@ -299,6 +299,12 @@ public class SimpleWebServer extends NanoHTTPD {
             res = getForbiddenResponse("Reading file failed.");
         }
 
+        res.addHeader("Access-Control-Allow-Origin", cors);
+        res.addHeader("Access-Control-Allow-Headers", calculateAllowHeaders());
+        res.addHeader("Access-Control-Allow-Credentials", "true");
+        res.addHeader("Access-Control-Allow-Methods", ALLOWED_METHODS);
+        res.addHeader("Access-Control-Max-Age", "" + MAX_AGE);
+
         return res;
     }
 
@@ -309,9 +315,9 @@ public class SimpleWebServer extends NanoHTTPD {
         return res;
     }
 
-    protected Response addCORSHeaders(Map<String, String> queryHeaders, Response resp, String cors) {
+    protected Response addCORSHeaders(Response resp, String cors) {
         resp.addHeader("Access-Control-Allow-Origin", cors);
-        resp.addHeader("Access-Control-Allow-Headers", calculateAllowHeaders(queryHeaders));
+        resp.addHeader("Access-Control-Allow-Headers", calculateAllowHeaders());
         resp.addHeader("Access-Control-Allow-Credentials", "true");
         resp.addHeader("Access-Control-Allow-Methods", ALLOWED_METHODS);
         resp.addHeader("Access-Control-Max-Age", "" + MAX_AGE);
@@ -319,7 +325,7 @@ public class SimpleWebServer extends NanoHTTPD {
         return resp;
     }
 
-    private String calculateAllowHeaders(Map<String, String> queryHeaders) {
+    private String calculateAllowHeaders() {
         // here we should use the given asked headers
         // but NanoHttpd uses a Map whereas it is possible for requester to send
         // several time the same header
