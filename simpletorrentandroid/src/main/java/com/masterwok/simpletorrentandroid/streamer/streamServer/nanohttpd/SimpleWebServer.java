@@ -62,7 +62,7 @@ public class SimpleWebServer extends NanoHTTPD {
     }
 
     public SimpleWebServer(String host, int port, boolean quiet) {
-        this(host, port, quiet, null);
+        this(host, port, quiet, "*");
     }
 
     private boolean canServeUri(String uri, File homeDir) {
