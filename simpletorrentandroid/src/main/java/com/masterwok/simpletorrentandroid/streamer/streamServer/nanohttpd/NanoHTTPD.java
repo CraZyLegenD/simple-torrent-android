@@ -2295,6 +2295,7 @@ public abstract class NanoHTTPD {
         InetSocketAddress inetSocketAddress = hostname != null ? new InetSocketAddress(hostname, myPort) : new InetSocketAddress(myPort);
         try {
             this.myServerSocket = new ServerSocket();
+            this.myServerSocket.setReuseAddress(true);
             this.myServerSocket.bind(inetSocketAddress);
             started = true;
         } catch (IOException | IllegalArgumentException | SecurityException io) {
@@ -2302,7 +2303,7 @@ public abstract class NanoHTTPD {
             started = false;
         }
 
-        this.myServerSocket.setReuseAddress(true);
+
         ServerRunnable serverRunnable = createServerRunnable(timeout);
         this.myThread = new Thread(serverRunnable);
         this.myThread.setDaemon(daemon);
