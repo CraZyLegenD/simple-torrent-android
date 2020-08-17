@@ -90,7 +90,7 @@ public final class TorrentStream {
         }
     };
 
-    private TorrentStream(TorrentOptions options) {
+    public TorrentStream(TorrentOptions options) {
         torrentOptions = options;
         initialise();
     }

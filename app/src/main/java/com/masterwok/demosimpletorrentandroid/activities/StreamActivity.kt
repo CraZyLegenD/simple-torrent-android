@@ -54,14 +54,13 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
             e.printStackTrace()
         }
 
-        val torrentStreamServer = TorrentStreamServer(ipAddress, 8080)
-        torrentStreamServer.setTorrentOptions(torrentOptions)
-        torrentStreamServer.startTorrentStream()
+        val torrentStreamServer = TorrentStreamServer(ipAddress, 8080, torrentOptions)
         torrentStreamServer.addListener(this)
 
         try {
             torrentStreamServer.startStream(link1)
             torrentStreamServer.setStreamVttSubtitle(vttFile)
+            debug("VTT LINK ${torrentStreamServer.currentVTTUrl}")
         } catch (e: IOException) {
             e.printStackTrace()
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()

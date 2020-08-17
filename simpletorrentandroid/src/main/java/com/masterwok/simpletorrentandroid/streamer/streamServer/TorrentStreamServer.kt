@@ -9,62 +9,40 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 
-class TorrentStreamServer (private val serverHost: String, private val serverPort: Int) {
+class TorrentStreamServer(serverHost: String, serverPort: Int, torrentOptions: TorrentOptions) {
     private val listeners: MutableList<TorrentServerListener> = ArrayList()
-    var options: TorrentOptions
-        private set
-    private var torrentStream: TorrentStream? = null
-    private var torrentStreamWebServer: TorrentStreamWebServer? = null
-    private val internalListener: TorrentListener = InternalTorrentServerListener()
-
-    fun setTorrentOptions(torrentOptions: TorrentOptions) {
-        options = torrentOptions
-        if (torrentStream != null) {
-            torrentStream?.options = torrentOptions
-        }
-    }
+    private val torrentStream: TorrentStream = TorrentStream(torrentOptions)
+    private val torrentStreamWebServer: TorrentStreamWebServer = TorrentStreamWebServer(serverHost, serverPort)
 
     val isStreaming: Boolean
-        get() = if (torrentStream == null) {
-            false
-        } else torrentStream?.isStreaming ?: false
+        get() = torrentStream.isStreaming
 
     fun resumeSession() {
-        if (torrentStream != null) {
-            torrentStream?.resumeSession()
-        }
+        torrentStream.resumeSession()
     }
 
     fun pauseSession() {
-        if (torrentStream != null) {
-            torrentStream?.pauseSession()
-        }
+        torrentStream.pauseSession()
     }
 
     val currentTorrentUrl: String?
-        get() = if (torrentStream == null) {
-            null
-        } else torrentStream?.currentTorrentUrl
+        get() = torrentStream.currentTorrentUrl
 
     val totalDhtNodes: Int?
-        get() = if (torrentStream == null) {
-            0
-        } else torrentStream?.totalDhtNodes
+        get() = torrentStream.totalDhtNodes
 
     val currentTorrent: Torrent?
-        get() = if (torrentStream == null) {
-            null
-        } else torrentStream?.currentTorrent
+        get() = torrentStream.currentTorrent
 
     val currentStreamUrl: String?
-        get() = if (torrentStreamWebServer == null || (torrentStreamWebServer?.wasStarted() == false)) {
+        get() = if (!torrentStreamWebServer.wasStarted()) {
             null
-        } else torrentStreamWebServer?.streamUrl
+        } else torrentStreamWebServer.streamUrl
 
     val currentVTTUrl: String?
-        get() = if (torrentStreamWebServer == null || (torrentStreamWebServer?.wasStarted() == false)) {
+        get() = if (!torrentStreamWebServer.wasStarted()) {
             null
-        } else torrentStreamWebServer?.vTTUrl
+        } else torrentStreamWebServer.vTTUrl
 
     fun addListener(listener: TorrentServerListener?) {
         if (listener != null) {
@@ -78,40 +56,26 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
         }
     }
 
-    fun startTorrentStream() {
-        torrentStream = TorrentStream.init(options)
-        torrentStream?.addListener(internalListener)
-    }
-
     fun stopTorrentStream() {
-        torrentStream?.apply {
+        torrentStream.apply {
             if (isStreaming) stopStream()
         }
-        torrentStream = null
+        torrentStream.stopStream()
     }
-    /**
-     * Start stream download for specified torrent
-     *
-     * @param torrentUrl [String] .torrent or magnet link
-     * @param srtSubtitleFile [File] SRT subtitle
-     * @param vttSubtitleFile [File] VTT subtitle
-     */
+
     /**
      * Start stream download for specified torrent
      *
      * @param torrentUrl [String] .torrent or magnet link
      */
-    @JvmOverloads
-    @Throws(TorrentStreamNotInitializedException::class, IOException::class)
-    fun startStream(torrentUrl: String, srtSubtitleFile: File? = null, vttSubtitleFile: File? = null) {
-        if (torrentStream == null) {
-            throw TorrentStreamNotInitializedException()
-        }
-        torrentStream?.startStream(torrentUrl)
-        torrentStreamWebServer = TorrentStreamWebServer(serverHost, serverPort)
-        torrentStreamWebServer?.setSrtSubtitleLocation(srtSubtitleFile)
-        torrentStreamWebServer?.setVttSubtitleLocation(vttSubtitleFile)
-        torrentStreamWebServer?.start()
+    /**
+     * Start stream download for specified torrent
+     *
+     * @param torrentUrl [String] .torrent or magnet link
+     */
+    fun startStream(torrentUrl: String) {
+        torrentStream.startStream(torrentUrl)
+        torrentStreamWebServer.start()
     }
 
     /**
@@ -119,7 +83,7 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
      * @param file [File] SRT subtitle
      */
     fun setStreamSrtSubtitle(file: File?) {
-        torrentStreamWebServer?.apply {
+        torrentStreamWebServer.apply {
             if (wasStarted()) setSrtSubtitleLocation(file)
         }
     }
@@ -129,7 +93,7 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
      * @param file [File] VTT subtitle
      */
     fun setStreamVttSubtitle(file: File?) {
-        torrentStreamWebServer?.apply {
+        torrentStreamWebServer.apply {
             if (wasStarted()) setVttSubtitleLocation(file)
         }
     }
@@ -138,10 +102,10 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
      * Stop current torrent stream
      */
     fun stopStream() {
-        torrentStreamWebServer?.apply {
+        torrentStreamWebServer.apply {
             if (wasStarted()) stop()
         }
-        torrentStream?.apply {
+        torrentStream.apply {
             if (isStreaming) stopStream()
         }
     }
@@ -175,8 +139,8 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
             for (listener in listeners) {
                 listener.onStreamReady(torrent)
             }
-            torrentStreamWebServer?.setVideoTorrent(torrent)
-            torrentStreamWebServer?.streamUrl?.let { onServerReady(it) }
+            torrentStreamWebServer.setVideoTorrent(torrent)
+            onServerReady(torrentStreamWebServer.streamUrl)
         }
 
         override fun onStreamProgress(torrent: Torrent, streamStatus: StreamStatus) {
@@ -192,7 +156,4 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
         }
     }
 
-    init {
-        options = TorrentOptions.Builder().build()
-    }
 }
