@@ -20,8 +20,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import androidx.annotation.NonNull;
-
 import com.frostwire.jlibtorrent.Priority;
 import com.frostwire.jlibtorrent.SessionManager;
 import com.frostwire.jlibtorrent.SessionParams;
@@ -50,7 +48,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 public final class TorrentStream {
@@ -90,7 +87,7 @@ public final class TorrentStream {
         }
     };
 
-    public TorrentStream(TorrentOptions options) {
+    private TorrentStream(TorrentOptions options) {
         torrentOptions = options;
         initialise();
     }
@@ -109,7 +106,6 @@ public final class TorrentStream {
 
     /**
      * Obtain internal session manager
-     *
      * @return {@link SessionManager}
      */
     public SessionManager getSessionManager() {
@@ -196,9 +192,6 @@ public final class TorrentStream {
      * @return {@link TorrentInfo}
      */
     private TorrentInfo getTorrentInfo(String torrentUrl) throws TorrentInfoException {
-
-        if (torrentUrl == null) return null;
-
         if (torrentUrl.startsWith("magnet")) {
             byte[] data = torrentSession.fetchMagnet(torrentUrl, 30000);
             if (data != null)
@@ -236,7 +229,7 @@ public final class TorrentStream {
             }
         } else if (torrentUrl.startsWith("file")) {
             Uri path = Uri.parse(torrentUrl);
-            File file = new File(Objects.requireNonNull(path.getPath()));
+            File file = new File(path.getPath());
 
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
@@ -273,7 +266,7 @@ public final class TorrentStream {
      *
      * @param torrentUrl {@link String} .torrent or magnet link
      */
-    public void startStream(@NonNull final String torrentUrl) {
+    public void startStream(final String torrentUrl) {
         if (!initialising && !initialised)
             initialise();
 

@@ -54,7 +54,9 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
             e.printStackTrace()
         }
 
-        val torrentStreamServer = TorrentStreamServer(ipAddress, 8080, torrentOptions)
+        val torrentStreamServer = TorrentStreamServer(ipAddress, 8080)
+        torrentStreamServer.setTorrentOptions(torrentOptions)
+        torrentStreamServer.startTorrentStream()
         torrentStreamServer.addListener(this)
 
         try {
@@ -71,6 +73,7 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
 
         testButton.setOnClickListenerCooldown {
             torrentStreamServer.stopTorrentStream()
+            torrentStreamServer.stopStream()
         }
     }
 

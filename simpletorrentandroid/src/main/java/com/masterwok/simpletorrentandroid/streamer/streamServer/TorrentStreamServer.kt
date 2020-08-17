@@ -9,30 +9,52 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 
-class TorrentStreamServer(serverHost: String, serverPort: Int, torrentOptions: TorrentOptions) {
+class TorrentStreamServer (private val serverHost: String, private val serverPort: Int) {
     private val listeners: MutableList<TorrentServerListener> = ArrayList()
-    private val torrentStream: TorrentStream = TorrentStream(torrentOptions)
+    var options: TorrentOptions
+        private set
+    private var torrentStream: TorrentStream? = null
     private val torrentStreamWebServer: TorrentStreamWebServer = TorrentStreamWebServer(serverHost, serverPort)
+    private val internalListener: TorrentListener = InternalTorrentServerListener()
+
+    fun setTorrentOptions(torrentOptions: TorrentOptions) {
+        options = torrentOptions
+        if (torrentStream != null) {
+            torrentStream?.options = torrentOptions
+        }
+    }
 
     val isStreaming: Boolean
-        get() = torrentStream.isStreaming
+        get() = if (torrentStream == null) {
+            false
+        } else torrentStream?.isStreaming ?: false
 
     fun resumeSession() {
-        torrentStream.resumeSession()
+        if (torrentStream != null) {
+            torrentStream?.resumeSession()
+        }
     }
 
     fun pauseSession() {
-        torrentStream.pauseSession()
+        if (torrentStream != null) {
+            torrentStream?.pauseSession()
+        }
     }
 
     val currentTorrentUrl: String?
-        get() = torrentStream.currentTorrentUrl
+        get() = if (torrentStream == null) {
+            null
+        } else torrentStream?.currentTorrentUrl
 
     val totalDhtNodes: Int?
-        get() = torrentStream.totalDhtNodes
+        get() = if (torrentStream == null) {
+            0
+        } else torrentStream?.totalDhtNodes
 
     val currentTorrent: Torrent?
-        get() = torrentStream.currentTorrent
+        get() = if (torrentStream == null) {
+            null
+        } else torrentStream?.currentTorrent
 
     val currentStreamUrl: String?
         get() = if (!torrentStreamWebServer.wasStarted()) {
@@ -40,7 +62,7 @@ class TorrentStreamServer(serverHost: String, serverPort: Int, torrentOptions: T
         } else torrentStreamWebServer.streamUrl
 
     val currentVTTUrl: String?
-        get() = if (!torrentStreamWebServer.wasStarted()) {
+        get() = if ((!torrentStreamWebServer.wasStarted())) {
             null
         } else torrentStreamWebServer.vTTUrl
 
@@ -56,25 +78,38 @@ class TorrentStreamServer(serverHost: String, serverPort: Int, torrentOptions: T
         }
     }
 
-    fun stopTorrentStream() {
-        torrentStream.apply {
-            if (isStreaming) stopStream()
-        }
-        torrentStream.stopStream()
+    fun startTorrentStream() {
+        torrentStream = TorrentStream.init(options)
+        torrentStream?.addListener(internalListener)
     }
 
+    fun stopTorrentStream() {
+        torrentStream?.apply {
+            if (isStreaming) stopStream()
+        }
+        torrentStream = null
+    }
     /**
      * Start stream download for specified torrent
      *
      * @param torrentUrl [String] .torrent or magnet link
+     * @param srtSubtitleFile [File] SRT subtitle
+     * @param vttSubtitleFile [File] VTT subtitle
      */
     /**
      * Start stream download for specified torrent
      *
      * @param torrentUrl [String] .torrent or magnet link
      */
-    fun startStream(torrentUrl: String) {
-        torrentStream.startStream(torrentUrl)
+    @JvmOverloads
+    @Throws(TorrentStreamNotInitializedException::class, IOException::class)
+    fun startStream(torrentUrl: String?, srtSubtitleFile: File? = null, vttSubtitleFile: File? = null) {
+        if (torrentStream == null) {
+            throw TorrentStreamNotInitializedException()
+        }
+        torrentStream?.startStream(torrentUrl)
+        torrentStreamWebServer.setSrtSubtitleLocation(srtSubtitleFile)
+        torrentStreamWebServer.setVttSubtitleLocation(vttSubtitleFile)
         torrentStreamWebServer.start()
     }
 
@@ -105,9 +140,10 @@ class TorrentStreamServer(serverHost: String, serverPort: Int, torrentOptions: T
         torrentStreamWebServer.apply {
             if (wasStarted()) stop()
         }
-        torrentStream.apply {
+        torrentStream?.apply {
             if (isStreaming) stopStream()
         }
+        torrentStreamWebServer.tearDown()
     }
 
     private inner class InternalTorrentServerListener : TorrentServerListener {
@@ -156,4 +192,7 @@ class TorrentStreamServer(serverHost: String, serverPort: Int, torrentOptions: T
         }
     }
 
+    init {
+        options = TorrentOptions.Builder().build()
+    }
 }

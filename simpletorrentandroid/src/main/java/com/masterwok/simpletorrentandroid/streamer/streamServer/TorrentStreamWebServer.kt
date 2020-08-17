@@ -12,7 +12,6 @@ class TorrentStreamWebServer(host: String, port: Int) : SimpleWebServer(host, po
     private var torrent: Torrent? = null
     private var srtSubtitleFile: File? = null
     private var vttSubtitleFile: File? = null
-
     fun setVideoTorrent(torrent: Torrent?) {
         this.torrent = torrent
     }
@@ -25,8 +24,12 @@ class TorrentStreamWebServer(host: String, port: Int) : SimpleWebServer(host, po
 
     fun setVttSubtitleLocation(file: File?) {
         file?.apply {
-            vttSubtitleFile = file
+            vttSubtitleFile = this
         }
+    }
+
+    fun tearDown(){
+        closeAllConnections()
     }
 
     val streamUrl: String
