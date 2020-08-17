@@ -7,7 +7,7 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 
-class TorrentStreamWebServer(host: String, port: Int) : SimpleWebServer(host, port, true) {
+class TorrentStreamWebServer(host: String, port: Int) : SimpleWebServer(host, port, true, "*") {
     private val EXTENSIONS: HashMap<String, FileType?> = HashMap()
     private var torrent: Torrent? = null
     private var srtSubtitleFile: File? = null
