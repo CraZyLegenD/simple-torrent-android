@@ -62,8 +62,6 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
         try {
             torrentStreamServer.startStream(link1)
             torrentStreamServer.setStreamVttSubtitle(vttFile)
-
-            debug("VTT URL ${torrentStreamServer.currentVTTUrl.toString()}")
         } catch (e: IOException) {
             e.printStackTrace()
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()

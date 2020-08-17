@@ -103,7 +103,7 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
      */
     @JvmOverloads
     @Throws(TorrentStreamNotInitializedException::class, IOException::class)
-    fun startStream(torrentUrl: String?, srtSubtitleFile: File? = null, vttSubtitleFile: File? = null) {
+    fun startStream(torrentUrl: String, srtSubtitleFile: File? = null, vttSubtitleFile: File? = null) {
         if (torrentStream == null) {
             throw TorrentStreamNotInitializedException()
         }

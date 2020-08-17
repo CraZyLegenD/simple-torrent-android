@@ -16,12 +16,16 @@ class TorrentStreamWebServer(host: String, port: Int) : SimpleWebServer(host, po
         this.torrent = torrent
     }
 
-    fun setSrtSubtitleLocation(srtSubtitleFile: File?) {
-        this.srtSubtitleFile = srtSubtitleFile
+    fun setSrtSubtitleLocation(file: File?) {
+        file?.apply {
+            srtSubtitleFile = this
+        }
     }
 
-    fun setVttSubtitleLocation(vttSubtitleFile: File?) {
-        this.vttSubtitleFile = vttSubtitleFile
+    fun setVttSubtitleLocation(file: File?) {
+        file?.apply {
+            vttSubtitleFile = file
+        }
     }
 
     val streamUrl: String
