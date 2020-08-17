@@ -16,6 +16,7 @@ import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentServerLis
 import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentStreamNotInitializedException
 import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentStreamServer
 import kotlinx.android.synthetic.main.activity_test.*
+import java.io.File
 import java.io.IOException
 import java.net.UnknownHostException
 
@@ -25,9 +26,17 @@ import java.net.UnknownHostException
  */
 class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerListener {
 
+    private val vttFile get() = File(filesDir, "test.vtt")
     private val link1 = "magnet:?xt=urn:btih:a54926c2e07b0e5f0243954330b599b31c804f0b&dn=Batman%20The%20Dark%20Knight%20(2008)%20%5b1080p%5d&tr=udp%3a%2f%2fopen.demonii.com%3a1337&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=udp%3a%2f%2ftracker.pomf.se%3a80&tr=udp%3a%2f%2ftracker.publicbt.com%3a80&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80&tr=udp%3a%2f%2ftracker.istole.it%3a80"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        resources.openRawResource(R.raw.sample).use {
+            vttFile.writeBytes(it.readBytes())
+        }
+
+        debug("VTT FILE ${vttFile.readText()}")
+        debug("VTT FILE ${vttFile.path}")
 
         val torrentOptions: TorrentOptions = TorrentOptions.Builder()
                 .saveLocation(filesDir)
@@ -45,15 +54,16 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
             e.printStackTrace()
         }
 
-        val torrentStreamServer = TorrentStreamServer.getInstance()
+        val torrentStreamServer = TorrentStreamServer(ipAddress, 8080)
         torrentStreamServer.setTorrentOptions(torrentOptions)
-        torrentStreamServer.setServerHost(ipAddress)
-        torrentStreamServer.setServerPort(8080)
         torrentStreamServer.startTorrentStream()
         torrentStreamServer.addListener(this)
 
         try {
             torrentStreamServer.startStream(link1)
+            torrentStreamServer.setStreamVttSubtitle(vttFile)
+
+            debug("VTT URL ${torrentStreamServer.currentVTTUrl.toString()}")
         } catch (e: IOException) {
             e.printStackTrace()
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
