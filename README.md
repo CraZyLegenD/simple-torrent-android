@@ -1,6 +1,6 @@
 
 
-[![](https://jitpack.io/v/CraZyLegenD/simple-torrent-android.svg)](https://jitpack.io/#CraZyLegenD/simple-torrent-android) [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-blue.svg)](https://kotlinlang.org) [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com/guide/)
+[![](https://jitpack.io/v/CraZyLegenD/simple-torrent-android.svg)](https://jitpack.io/#CraZyLegenD/simple-torrent-android) [![Kotlin](https://img.shields.io/badge/Kotlin-1.4.0-blue.svg)](https://kotlinlang.org) [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com/guide/)
 
 # simple-torrent-android
 An Android torrent client library powered by [frostwire-jlibtorrent](https://github.com/frostwire/frostwire-jlibtorrent). It supports sequential and simultaneous downloads.
