@@ -13,22 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.masterwok.simpletorrentandroid.streamer.listeners
 
-package com.masterwok.simpletorrentandroid.streamer.listeners;
+import com.masterwok.simpletorrentandroid.streamer.StreamStatus
+import com.masterwok.simpletorrentandroid.streamer.Torrent
 
-import com.masterwok.simpletorrentandroid.streamer.StreamStatus;
-import com.masterwok.simpletorrentandroid.streamer.Torrent;
-
-public interface TorrentListener {
-    void onStreamPrepared(Torrent torrent);
-
-    void onStreamStarted(Torrent torrent);
-
-    void onStreamError(Torrent torrent, Exception e);
-
-    void onStreamReady(Torrent torrent);
-
-    void onStreamProgress(Torrent torrent, StreamStatus status);
-
-    void onStreamStopped();
+interface TorrentListener {
+    fun onStreamPrepared(torrent: Torrent?)
+    fun onStreamStarted(torrent: Torrent?)
+    fun onStreamError(torrent: Torrent?, e: Exception?)
+    fun onStreamReady(torrent: Torrent?)
+    fun onStreamProgress(torrent: Torrent?, status: StreamStatus?)
+    fun onStreamStopped()
 }

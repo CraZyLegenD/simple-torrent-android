@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.crazylegend.kotlinextensions.coroutines.defaultCoroutine
 import com.crazylegend.kotlinextensions.log.debug
 import com.crazylegend.kotlinextensions.views.setOnClickListenerCooldown
 import com.masterwok.demosimpletorrentandroid.R
@@ -27,7 +28,7 @@ import java.net.UnknownHostException
 class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerListener {
 
     private val vttFile get() = File(filesDir, "test.vtt")
-    private val link1 = "magnet:?xt=urn:btih:a54926c2e07b0e5f0243954330b599b31c804f0b&dn=Batman%20The%20Dark%20Knight%20(2008)%20%5b1080p%5d&tr=udp%3a%2f%2fopen.demonii.com%3a1337&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=udp%3a%2f%2ftracker.pomf.se%3a80&tr=udp%3a%2f%2ftracker.publicbt.com%3a80&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80&tr=udp%3a%2f%2ftracker.istole.it%3a80"
+    private val link1 = "magnet:?xt=urn:btih:fa8bcc16683b3c4bf2178cd2e965f06ee23b6f36&dn=The.Food.Guide.to.Love.2013.BRRip.x264-HUD&tr=http%3a%2f%2ftracker.zamunda.net%2fannounce.php%3fpasskey%3d994c30f57886bff77851922c2f0a343e"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,6 +59,7 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
         torrentStreamServer.setTorrentOptions(torrentOptions)
         torrentStreamServer.startTorrentStream()
         torrentStreamServer.addListener(this)
+
 
         try {
             torrentStreamServer.startStream(link1)
@@ -107,7 +109,6 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
 
     override fun onStreamError(torrent: Torrent?, e: Exception?) {
         debug("onStreamError $torrent exception ${e?.message.toString()}")
-
     }
 
 }

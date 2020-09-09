@@ -314,6 +314,7 @@ public final class TorrentStream {
                 try {
                     torrentInfo = getTorrentInfo(torrentUrl);
                 } catch (final TorrentInfoException e) {
+                    e.printStackTrace();
                     for (final TorrentListener listener : listeners) {
                         ThreadUtils.runOnUiThread(new Runnable() {
                             @Override

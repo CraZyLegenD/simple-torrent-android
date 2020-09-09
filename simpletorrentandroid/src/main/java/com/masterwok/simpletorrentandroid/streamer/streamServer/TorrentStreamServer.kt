@@ -153,25 +153,25 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
             }
         }
 
-        override fun onStreamPrepared(torrent: Torrent) {
+        override fun onStreamPrepared(torrent: Torrent?) {
             for (listener in listeners) {
                 listener.onStreamPrepared(torrent)
             }
         }
 
-        override fun onStreamStarted(torrent: Torrent) {
+        override fun onStreamStarted(torrent: Torrent?) {
             for (listener in listeners) {
                 listener.onStreamStarted(torrent)
             }
         }
 
-        override fun onStreamError(torrent: Torrent, e: Exception) {
+        override fun onStreamError(torrent: Torrent?, e: Exception?) {
             for (listener in listeners) {
                 listener.onStreamError(torrent, e)
             }
         }
 
-        override fun onStreamReady(torrent: Torrent) {
+        override fun onStreamReady(torrent: Torrent?) {
             for (listener in listeners) {
                 listener.onStreamReady(torrent)
             }
@@ -179,9 +179,9 @@ class TorrentStreamServer (private val serverHost: String, private val serverPor
             onServerReady(torrentStreamWebServer.streamUrl)
         }
 
-        override fun onStreamProgress(torrent: Torrent, streamStatus: StreamStatus) {
+        override fun onStreamProgress(torrent: Torrent?, status: StreamStatus?) {
             for (listener in listeners) {
-                listener.onStreamProgress(torrent, streamStatus)
+                listener.onStreamProgress(torrent, status)
             }
         }
 

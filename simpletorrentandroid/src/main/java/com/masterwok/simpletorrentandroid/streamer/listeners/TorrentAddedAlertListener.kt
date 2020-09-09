@@ -13,30 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.masterwok.simpletorrentandroid.streamer.listeners
 
-package com.masterwok.simpletorrentandroid.streamer.listeners;
+import com.frostwire.jlibtorrent.AlertListener
+import com.frostwire.jlibtorrent.alerts.AddTorrentAlert
+import com.frostwire.jlibtorrent.alerts.Alert
+import com.frostwire.jlibtorrent.alerts.AlertType
 
-import com.frostwire.jlibtorrent.AlertListener;
-import com.frostwire.jlibtorrent.alerts.AddTorrentAlert;
-import com.frostwire.jlibtorrent.alerts.Alert;
-import com.frostwire.jlibtorrent.alerts.AlertType;
-
-public abstract class TorrentAddedAlertListener implements AlertListener {
-    @Override
-    public int[] types() {
-        return new int[]{AlertType.ADD_TORRENT.swig()};
+abstract class TorrentAddedAlertListener : AlertListener {
+    override fun types(): IntArray {
+        return intArrayOf(AlertType.ADD_TORRENT.swig())
     }
 
-    @Override
-    public void alert(Alert<?> alert) {
-        switch (alert.type()) {
-            case ADD_TORRENT:
-                torrentAdded((AddTorrentAlert) alert);
-                break;
-            default:
-                break;
+    override fun alert(alert: Alert<*>) {
+        when (alert.type()) {
+            AlertType.ADD_TORRENT -> torrentAdded(alert as AddTorrentAlert)
+            else -> {
+            }
         }
     }
 
-    public abstract void torrentAdded(AddTorrentAlert alert);
+    abstract fun torrentAdded(alert: AddTorrentAlert?)
 }

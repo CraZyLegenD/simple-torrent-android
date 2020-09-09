@@ -13,19 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.masterwok.simpletorrentandroid.streamer
 
-package com.masterwok.simpletorrentandroid.streamer;
-
-public class StreamStatus {
-    public final float progress;
-    public final int bufferProgress;
-    public final int seeds;
-    public final int downloadSpeed;
-
-    StreamStatus(float progress, int bufferProgress, int seeds, int downloadSpeed) {
-        this.progress = progress;
-        this.bufferProgress = bufferProgress;
-        this.seeds = seeds;
-        this.downloadSpeed = downloadSpeed;
-    }
-}
+class StreamStatus internal constructor(val progress: Float, val bufferProgress: Int, val seeds: Int, val downloadSpeed: Int)

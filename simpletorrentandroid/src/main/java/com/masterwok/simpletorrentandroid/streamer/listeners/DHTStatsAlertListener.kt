@@ -16,42 +16,33 @@
  *  * along with TorrentStreamer-Android. If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package com.masterwok.simpletorrentandroid.streamer.listeners
 
-package com.masterwok.simpletorrentandroid.streamer.listeners;
+import com.frostwire.jlibtorrent.AlertListener
+import com.frostwire.jlibtorrent.alerts.Alert
+import com.frostwire.jlibtorrent.alerts.AlertType
+import com.frostwire.jlibtorrent.alerts.DhtStatsAlert
 
-import com.frostwire.jlibtorrent.AlertListener;
-import com.frostwire.jlibtorrent.DhtRoutingBucket;
-import com.frostwire.jlibtorrent.alerts.Alert;
-import com.frostwire.jlibtorrent.alerts.AlertType;
-import com.frostwire.jlibtorrent.alerts.DhtStatsAlert;
-
-import java.util.ArrayList;
-
-public abstract class DHTStatsAlertListener implements AlertListener {
-    @Override
-    public int[] types() {
-        return new int[]{AlertType.DHT_STATS.swig()};
+abstract class DHTStatsAlertListener : AlertListener {
+    override fun types(): IntArray {
+        return intArrayOf(AlertType.DHT_STATS.swig())
     }
 
-    public void alert(Alert<?> alert) {
-        if (alert instanceof DhtStatsAlert) {
-            DhtStatsAlert dhtAlert = (DhtStatsAlert) alert;
-            stats(countTotalDHTNodes(dhtAlert));
+    override fun alert(alert: Alert<*>?) {
+        if (alert is DhtStatsAlert) {
+            stats(countTotalDHTNodes(alert))
         }
     }
 
-    public abstract void stats(int totalDhtNodes);
-
-    private int countTotalDHTNodes(DhtStatsAlert alert) {
-        final ArrayList<DhtRoutingBucket> routingTable = alert.routingTable();
-
-        int totalNodes = 0;
+    abstract fun stats(totalDhtNodes: Int)
+    private fun countTotalDHTNodes(alert: DhtStatsAlert): Int {
+        val routingTable = alert.routingTable()
+        var totalNodes = 0
         if (routingTable != null) {
-            for (DhtRoutingBucket bucket : routingTable) {
-                totalNodes += bucket.numNodes();
+            for (bucket in routingTable) {
+                totalNodes += bucket.numNodes()
             }
         }
-
-        return totalNodes;
+        return totalNodes
     }
 }
