@@ -33,7 +33,7 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    def jLibTorrent_version = '1.2.8.0.jar'
+    def jLibTorrent_version = '1.2.10.0.jar'
     // jLibTorrent
     api files("libs/jlibtorrent-$jLibTorrent_version")
     api files("libs/jlibtorrent-android-arm-$jLibTorrent_version")
