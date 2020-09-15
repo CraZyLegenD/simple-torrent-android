@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'de.undercouch.download'
 
 android {
     compileSdkVersion 30
@@ -24,22 +25,36 @@ android {
 
 }
 
+// Custom task which downloads the appropriate version of JAR files for jlibtorrent
+task downloadDependencies(type: Download) {
+    def baseUrl = "https://github.com/frostwire/frostwire-jlibtorrent" +
+            "/releases/download/release%2F$libtorrentVersion"
+
+    def platforms = ['arm', 'arm64', 'x86', 'x86_64']
+    def urls = platforms.collect { "$baseUrl/jlibtorrent-android-$it-${libtorrentVersion}.jar" }
+    urls.add("$baseUrl/jlibtorrent-${libtorrentVersion}.jar")
+
+    src urls
+    dest 'libs'
+    overwrite false
+}
+
+// Add our custom task as a dependency to the build
+// You may need to run gradle sync for IDE warnings to disappear
+preBuild.dependsOn(downloadDependencies)
+
+// Add deletion of libs folder to clean task
+clean {
+    delete 'libs'
+}
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
-    def jLibTorrent_version = '1.2.10.0.jar'
-    // jLibTorrent
-    api files("libs/jlibtorrent-$jLibTorrent_version")
-    api files("libs/jlibtorrent-android-arm-$jLibTorrent_version")
-    api files("libs/jlibtorrent-android-x86-$jLibTorrent_version")
-    api files("libs/jlibtorrent-android-arm64-$jLibTorrent_version")
-    api files("libs/jlibtorrent-android-x86_64-$jLibTorrent_version")
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.3.0'
