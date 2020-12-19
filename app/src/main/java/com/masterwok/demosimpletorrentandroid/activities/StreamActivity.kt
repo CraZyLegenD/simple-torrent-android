@@ -3,6 +3,7 @@ package com.masterwok.demosimpletorrentandroid.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.crazylegend.kotlinextensions.coroutines.defaultCoroutine
@@ -16,7 +17,6 @@ import com.masterwok.simpletorrentandroid.streamer.TorrentOptions
 import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentServerListener
 import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentStreamNotInitializedException
 import com.masterwok.simpletorrentandroid.streamer.streamServer.TorrentStreamServer
-import kotlinx.android.synthetic.main.activity_test.*
 import java.io.File
 import java.io.IOException
 import java.net.UnknownHostException
@@ -73,7 +73,7 @@ class StreamActivity : AppCompatActivity(R.layout.activity_test), TorrentServerL
             Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
         }
 
-        testButton.setOnClickListenerCooldown {
+        findViewById<Button>(R.id.testButton).setOnClickListenerCooldown {
             torrentStreamServer.stopTorrentStream()
             torrentStreamServer.stopStream()
         }

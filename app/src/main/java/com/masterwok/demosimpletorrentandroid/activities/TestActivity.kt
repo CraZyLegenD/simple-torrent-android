@@ -3,6 +3,7 @@ package com.masterwok.demosimpletorrentandroid.activities
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.crazylegend.kotlinextensions.coroutines.mainCoroutine
 import com.frostwire.jlibtorrent.TorrentHandle
@@ -11,7 +12,6 @@ import com.masterwok.simpletorrentandroid.downloader.TorrentSession
 import com.masterwok.simpletorrentandroid.downloader.TorrentSessionOptions
 import com.masterwok.simpletorrentandroid.downloader.contracts.TorrentSessionListener
 import com.masterwok.simpletorrentandroid.downloader.models.TorrentSessionStatus
-import kotlinx.android.synthetic.main.activity_test.*
 
 class TestActivity : AppCompatActivity(), TorrentSessionListener {
 
@@ -32,7 +32,7 @@ class TestActivity : AppCompatActivity(), TorrentSessionListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-        testButton.setOnClickListener {
+        findViewById<Button>(R.id.testButton).setOnClickListener {
         }
 
         filesDir.deleteRecursively()
