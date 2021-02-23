@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.crazylegend.kotlinextensions.coroutines.defaultCoroutine
 import com.crazylegend.kotlinextensions.log.debug
 import com.crazylegend.kotlinextensions.views.setOnClickListenerCooldown
 import com.masterwok.demosimpletorrentandroid.R

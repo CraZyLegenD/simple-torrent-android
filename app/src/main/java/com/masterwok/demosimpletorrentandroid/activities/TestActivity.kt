@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.crazylegend.kotlinextensions.coroutines.mainCoroutine
+import com.crazylegend.coroutines.mainCoroutine
 import com.frostwire.jlibtorrent.TorrentHandle
 import com.masterwok.demosimpletorrentandroid.R
 import com.masterwok.simpletorrentandroid.downloader.TorrentSession
